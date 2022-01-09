@@ -1,9 +1,10 @@
 // import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
 import Home from './components/Home';
 import Movies from './components/Movies';
 import Admin from './components/Admin';
 import Categories from './components/Categories';
+import OneMovie from './components/OneMovie';
 
 export default function App() {
   return (
@@ -52,13 +53,15 @@ export default function App() {
                 <Home />
               </Route>
 
-              <Route path="/movies">
+              <Route exact path="/movies">
                 <Movies />
               </Route>
 
-              <Route path="/movies/:id">
+              <Route path="/movies/:id" component={OneMovie}/>
+
+              {/* <Route path="/movies/:id">
                 <Movie />
-              </Route>
+              </Route> */}
 
               <Route exact path="/by-category">
                 <CategoryPage />
@@ -88,11 +91,11 @@ export default function App() {
   );
 }
 
-function Movie() {
-  let { id } = useParams();
+// function Movie() {
+//   let { id } = useParams();
 
-  return <h2>Movie id {id}</h2>
-}
+//   return <h2>Movie id {id}</h2>
+// }
 
 function CategoryPage() {
   let { path, url } = useRouteMatch();
