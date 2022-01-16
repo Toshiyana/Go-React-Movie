@@ -1,10 +1,11 @@
 // import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Movies from './components/Movies';
 import Admin from './components/Admin';
 import OneMovie from './components/OneMovie';
 import Genres from './components/Genres';
+import OneGenre from './components/OneGenre';
 
 export default function App() {
   return (
@@ -66,6 +67,8 @@ export default function App() {
               <Route exact path="/genres">
                 <Genres />
               </Route>
+
+              <Route path="/genres/:id" component={OneGenre}/>
 
               <Route path="/admin">
                 <Admin />
