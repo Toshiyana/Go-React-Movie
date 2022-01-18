@@ -6,6 +6,7 @@ import Admin from './components/Admin';
 import OneMovie from './components/OneMovie';
 import Genres from './components/Genres';
 import OneGenre from './components/OneGenre';
+import EditMovie from './components/EditMovie';
 
 export default function App() {
   return (
@@ -42,6 +43,12 @@ export default function App() {
 
               <ul className="list-group">
                 <li className="list-group-item">
+                  <Link to="/admin/add">Add Movie</Link>
+                </li>
+              </ul>
+
+              <ul className="list-group">
+                <li className="list-group-item">
                   <Link to="/admin">Manage Catalogue</Link>
                 </li>
               </ul>
@@ -69,6 +76,8 @@ export default function App() {
               </Route>
 
               <Route path="/genres/:id" component={OneGenre}/>
+
+              <Route path="/admin/add" component={EditMovie}/>
 
               <Route path="/admin">
                 <Admin />
