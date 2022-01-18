@@ -9,6 +9,52 @@ export default class EditMovie extends Component {
         error: null,
     }
 
+    constructor(props) {
+        super(props);
+        // set default value
+        this.state = {
+            movie: {
+                id: 0,
+                title: "",
+                release_date: "",
+                runtime: "",
+                mpaa_rating: "",
+                rating: "",
+                description: "",
+            },
+            isLoaded: false,
+            error: null,
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit = (evt) => {
+        console.log("Form was submitted");
+        evt.preventDefault();
+    }
+
+    handleChange = (evt) => {
+        let value = evt.target.value;
+        let name = evt.target.name;
+        this.setState((prevState) => ({
+            movie: {
+                ...prevState.movie,
+                [name]: value,
+            }
+        }))
+    }
+    
+    componentDidMount() {
+        // this.setState({
+        //     movie: {
+        //         title: "The Godfather",
+        //         mpaa_rating: "R",
+        //     }
+        // });
+    }
+
     render() {
         let {movie} = this.state;
 
@@ -16,7 +62,16 @@ export default class EditMovie extends Component {
             <Fragment>
                 <h2>Add/Edit Movie</h2>
                 <hr />
-                <form method="post">
+                <form onSubmit={this.handleSubmit}>
+                    <input
+                        type="hidden"
+                        name="id"
+                        id="id"
+                        value={movie.id}
+                        onChange={this.handleChange}
+                    />
+
+
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">
                             Title
@@ -27,6 +82,7 @@ export default class EditMovie extends Component {
                             id="title"
                             name="title"
                             value={movie.title}
+                            onChange={this.handleChange}
                         />
                     </div>
 
@@ -40,6 +96,7 @@ export default class EditMovie extends Component {
                             id="release_date"
                             name="release_date"
                             value={movie.release_date}
+                            onChange={this.handleChange}
                         />
                     </div>
 
@@ -53,6 +110,7 @@ export default class EditMovie extends Component {
                             id="runtime"
                             name="runtime"
                             value={movie.runtime}
+                            onChange={this.handleChange}
                         />
                     </div>
 
@@ -60,7 +118,7 @@ export default class EditMovie extends Component {
                         <label htmlFor="mpaa_rating" className="form-label">
                             MPAA Rating
                         </label>
-                        <select className="form-select" value={movie.mpaa_rating}>
+                        <select name="mpaa_rating" className="form-select" value={movie.mpaa_rating} onChange={this.handleChange}>
                             <option className="form-select">Choose...</option>
                             <option className="form-select" value="G">G</option>
                             <option className="form-select" value="PG">PG</option>
@@ -80,6 +138,7 @@ export default class EditMovie extends Component {
                             id="rating"
                             name="rating"
                             value={movie.rating}
+                            onChange={this.handleChange}
                         />
                     </div>
 
@@ -87,15 +146,24 @@ export default class EditMovie extends Component {
                         <label htmlFor="description" className="form-label">
                             Description
                         </label>
-                        <textarea className="form-control" id="description" name="description" rows="3">
-                            {movie.description}
-                        </textarea>
+                        <textarea
+                            className="form-control"
+                            id="description"
+                            name="description"
+                            rows="3"
+                            value={movie.description}
+                            onChange={this.handleChange}
+                        />
                     </div>
 
                     <hr />
 
                     <button className="btn btn-primary">Save</button>
                 </form>
+
+                <div className="mt-3">
+                    <pre>{JSON.stringify(this.state, null, 3)}</pre>
+                </div>
             </Fragment>
         )
     }
