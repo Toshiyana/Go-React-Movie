@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import './EditMovie.css';
+import Input from './form-components/Input';
 
 
 export default class EditMovie extends Component {
@@ -45,7 +46,7 @@ export default class EditMovie extends Component {
             }
         }))
     }
-    
+
     componentDidMount() {
         // this.setState({
         //     movie: {
@@ -72,7 +73,7 @@ export default class EditMovie extends Component {
                     />
 
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="title" className="form-label">
                             Title
                         </label>
@@ -84,23 +85,39 @@ export default class EditMovie extends Component {
                             value={movie.title}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
 
-                    <div className="mb-3">
+                    <Input
+                        title={"Title"}
+                        type={"text"}
+                        name={"title"}
+                        value={movie.title}
+                        handleChange={this.handleChange}
+                    />
+
+                    {/* <div className="mb-3">
                         <label htmlFor="release_date" className="form-label">
                             Release Date
                         </label>
                         <input
-                            type="text"
+                            type="date"
                             className="form-control"
                             id="release_date"
                             name="release_date"
                             value={movie.release_date}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
 
-                    <div className="mb-3">
+                    <Input
+                        title={"Release Date"}
+                        type={"date"}
+                        name={"release_date"}
+                        value={movie.release_date}
+                        handleChange={this.handleChange}
+                    />
+
+                    {/* <div className="mb-3">
                         <label htmlFor="runtime" className="form-label">
                             Runtime
                         </label>
@@ -112,7 +129,15 @@ export default class EditMovie extends Component {
                             value={movie.runtime}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
+
+                    <Input
+                        title={"Runtime"}
+                        type={"text"}
+                        name={"runtime"}
+                        value={movie.runtime}
+                        handleChange={this.handleChange}
+                    />
 
                     <div className="mb-3">
                         <label htmlFor="mpaa_rating" className="form-label">
@@ -128,7 +153,7 @@ export default class EditMovie extends Component {
                         </select>
                     </div>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="rating" className="form-label">
                             Rating
                         </label>
@@ -140,7 +165,15 @@ export default class EditMovie extends Component {
                             value={movie.rating}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
+
+                    <Input
+                        title={"Rating"}
+                        type={"text"}
+                        name={"rating"}
+                        value={movie.rating}
+                        handleChange={this.handleChange}
+                    />
 
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">
