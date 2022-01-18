@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import './EditMovie.css';
 import Input from './form-components/Input';
-
+import TextArea from './form-components/TextArea';
 
 export default class EditMovie extends Component {
     state = {
@@ -175,7 +175,7 @@ export default class EditMovie extends Component {
                         handleChange={this.handleChange}
                     />
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="description" className="form-label">
                             Description
                         </label>
@@ -187,7 +187,15 @@ export default class EditMovie extends Component {
                             value={movie.description}
                             onChange={this.handleChange}
                         />
-                    </div>
+                    </div> */}
+
+                    <TextArea
+                        title={"Description"}
+                        name={"description"}
+                        value={movie.description}
+                        rows={"3"}
+                        handleChange={this.handleChange}
+                    />
 
                     <hr />
 
