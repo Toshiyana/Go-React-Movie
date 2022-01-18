@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import './EditMovie.css';
 import Input from './form-components/Input';
 import TextArea from './form-components/TextArea';
+import Select from './form-components/Select';
 
 export default class EditMovie extends Component {
     state = {
@@ -23,6 +24,13 @@ export default class EditMovie extends Component {
                 rating: "",
                 description: "",
             },
+            mpaaOptions: [
+                {id: "G", value: "G"},
+                {id: "PG", value: "PG"},
+                {id: "PG13", value: "PG13"},
+                {id: "R", value: "R"},
+                {id: "NC17", value: "NC17"},
+            ],
             isLoaded: false,
             error: null,
         }
@@ -139,7 +147,7 @@ export default class EditMovie extends Component {
                         handleChange={this.handleChange}
                     />
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="mpaa_rating" className="form-label">
                             MPAA Rating
                         </label>
@@ -151,7 +159,16 @@ export default class EditMovie extends Component {
                             <option className="form-select" value="R">R</option>
                             <option className="form-select" value="NC17">NC17</option>
                         </select>
-                    </div>
+                    </div> */}
+
+                    <Select
+                        title={"MPAA Rating"}
+                        name={"mpaa_rating"}
+                        options={this.state.mpaaOptions}
+                        value={movie.mpaa_rating}
+                        handleChange={this.handleChange}
+                        placeholder={"Choose..."}
+                    />
 
                     {/* <div className="mb-3">
                         <label htmlFor="rating" className="form-label">
