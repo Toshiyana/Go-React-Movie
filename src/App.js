@@ -8,6 +8,8 @@ import Genres from './components/Genres';
 import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 export default function App() {
   return (
     <Router>
