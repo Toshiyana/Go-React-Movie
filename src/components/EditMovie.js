@@ -1,4 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './EditMovie.css';
 import Input from './form-components/Input';
 import TextArea from './form-components/TextArea';
@@ -104,6 +107,25 @@ export default class EditMovie extends Component {
 
     hasError(key) {
         return this.state.errors.indexOf(key) !== -1;
+    }
+
+    confirmDelete = (evt) => {
+        console.log("would delete movie id", this.state.movie.id);
+
+        confirmAlert({
+            title: 'Delete Movie?',
+            message: 'Are you sure?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => alert('Click Yes')
+              },
+              {
+                label: 'No',
+                onClick: () => {}
+              }
+            ]
+          });
     }
 
     componentDidMount() {
@@ -319,6 +341,15 @@ export default class EditMovie extends Component {
                         <hr />
     
                         <button className="btn btn-primary">Save</button>
+                        <Link to="/admin" className="btn btn-warning ms-1">
+                            Cancel
+                        </Link>
+                        {movie.id > 0 && (
+                            <a href="#!" onClick={() => this.confirmDelete()}
+                            className="btn btn-danger ms-1">
+                                Delete
+                            </a>
+                        )}
                     </form>
     
                     <div className="mt-3">
