@@ -83,12 +83,16 @@ export default class EditMovie extends Component {
             .then(data => {
                 // console.log(data);
                 if (data.error) {
+                    alert(data.error.message);
                     this.setState({
                         alert: { type: "alert-danger", message: data.error.message },
                     });
                 } else {
-                    this.setState({
-                        alert: { type: "alert-success", message: "Changes saved!" },
+                    // this.setState({
+                    //     alert: { type: "alert-success", message: "Changes saved!" },
+                    // });
+                    this.props.history.push({
+                        pathname: "/admin",
                     });
                 }
             })
