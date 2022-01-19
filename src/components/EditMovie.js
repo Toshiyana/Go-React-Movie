@@ -18,7 +18,7 @@ export default class EditMovie extends Component {
         // set default value
         this.state = {
             movie: {
-                id: 0, // if you set id=0, inserted id in database is auto inclement value.
+                id: 0,
                 title: "",
                 release_date: "",
                 runtime: "",
