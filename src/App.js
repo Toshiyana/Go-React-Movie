@@ -1,4 +1,4 @@
-// import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Movies from './components/Movies';
@@ -7,90 +7,123 @@ import OneMovie from './components/OneMovie';
 import Genres from './components/Genres';
 import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
+import Login from "./components/Login";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-export default function App() {
-  return (
-    <Router>
-      <div className="container">
+export default class App extends Component {
 
-        <div className="row">
-          <h1 className="mt-3">
-            Go Watch a Movie!
-          </h1>
-          <hr className="mb-3"></hr>
-        </div>
+  constructor(props) {
+    super(props);
+    this.state = {
+      jwt: "",
+    }
+    this.handleJWTChange(this.handleJWTChange.bind(this));
+  }
 
-        <div className="row">
-          <div className="col-md-2">
-            <nav>
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to="/">Home</Link>
-                </li>
-              </ul>
+  handleJWTChange = (jwt) => {
+    this.setState({jwt: jwt});
+  }
 
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to="/movies">Movies</Link>
-                </li>
-              </ul>
+  logout = () => {
+    this.setState({jwt: ""});
+  }
 
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to="/genres">Genres</Link>
-                </li>
-              </ul>
+  render() {
+    let loginLink;
+    if (this.state.jwt === "") {
+      loginLink = <Link to="/login">Login</Link>
+    } else {
+      loginLink = <Link to="/logout" onClick={this.logout}>Logout</Link>
+    }
 
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to="/admin/movie/0">Add Movie</Link>
-                </li>
-              </ul>
+    return (
+      <Router>
+        <div className="container">
+  
+          <div className="row">
+            <div className="col mt-3">
+              <h1 className="mt-3">Go Watch a Movie!</h1>
+            </div>
+            
+            <div className="col mt-3 text-end">
+              {loginLink}
+            </div>
 
-              <ul className="list-group">
-                <li className="list-group-item">
-                  <Link to="/admin">Manage Catalogue</Link>
-                </li>
-              </ul>
-            </nav>
+            <hr className="mb-3"></hr>
           </div>
 
-          <div className="col-md-10">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
+          <div className="row">
+            <div className="col-md-2">
+              <nav>
+                <ul className="list-group">
+                  <li className="list-group-item">
+                    <Link to="/">Home</Link>
+                  </li>
 
-              <Route exact path="/movies">
-                <Movies />
-              </Route>
+                  <li className="list-group-item">
+                    <Link to="/movies">Movies</Link>
+                  </li>
 
-              <Route path="/movies/:id" component={OneMovie}/>
+                  <li className="list-group-item">
+                    <Link to="/genres">Genres</Link>
+                  </li>
 
-              {/* <Route path="/movies/:id">
-                <Movie />
-              </Route> */}
+                  {this.state.jwt !== "" && (
+                    <Fragment>
+                      <li className="list-group-item">
+                        <Link to="/admin/movie/0">Add movie</Link>
+                      </li>
+                      <li className="list-group-item">
+                        <Link to="/admin">Manage Catalogue</Link>
+                      </li>
+                    </Fragment>
+                  )}
+                </ul>
 
-              <Route exact path="/genres">
-                <Genres />
-              </Route>
+              </nav>
+            </div>
+  
+            <div className="col-md-10">
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+  
+                <Route exact path="/movies">
+                  <Movies />
+                </Route>
+  
+                <Route path="/movies/:id" component={OneMovie}/>
+  
+                {/* <Route path="/movies/:id">
+                  <Movie />
+                </Route> */}
+  
+                <Route exact path="/genres">
+                  <Genres />
+                </Route>
+  
+                <Route path="/genres/:id" component={OneGenre}/>
 
-              <Route path="/genres/:id" component={OneGenre}/>
-
-              <Route path="/admin/movie/:id" component={EditMovie}/>
-
-              <Route path="/admin">
-                <Admin />
-              </Route>
-            </Switch>
+                <Route
+                  exact path="/login"
+                  component={(props) => <Login {...props} handleJWTChange={this.handleJWTChange} />}
+                />
+  
+                <Route path="/admin/movie/:id" component={EditMovie}/>
+  
+                <Route path="/admin">
+                  <Admin />
+                </Route>
+              </Switch>
+            </div>
           </div>
+  
         </div>
-
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 // function Movie() {
