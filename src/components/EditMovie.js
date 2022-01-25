@@ -50,102 +50,6 @@ export default class EditMovie extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit = (evt) => {
-        // console.log("Form was submitted");
-        evt.preventDefault();
-
-        //----------------------------------------------------------------
-        // client side validation
-        //----------------------------------------------------------------
-        let errors = [];
-        if (this.state.movie.title === "") {
-            errors.push("title");
-        }
-
-        this.setState({errors: errors});
-
-        if (errors.length > 0) {
-            return false;
-        }
-        //----------------------------------------------------------------
-
-        const data = new FormData(evt.target);
-        const payload = Object.fromEntries(data.entries()); // convert data to payload, and get all form data
-        console.log(payload);
-
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(payload),
-        }
-
-        fetch('http://localhost:8080/v1/admin/editmovie', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data);
-                if (data.error) {
-                    alert(data.error.message);
-                    this.setState({
-                        alert: { type: "alert-danger", message: data.error.message },
-                    });
-                } else {
-                    // this.setState({
-                    //     alert: { type: "alert-success", message: "Changes saved!" },
-                    // });
-                    this.props.history.push({
-                        pathname: "/admin",
-                    });
-                }
-            })
-    }
-
-    handleChange = (evt) => {
-        let value = evt.target.value;
-        let name = evt.target.name;
-        this.setState((prevState) => ({
-            movie: {
-                ...prevState.movie,
-                [name]: value,
-            }
-        }))
-    }
-
-    hasError(key) {
-        return this.state.errors.indexOf(key) !== -1;
-    }
-
-    confirmDelete = (evt) => {
-        // console.log("would delete movie id", this.state.movie.id);
-
-        confirmAlert({
-            title: 'Delete Movie?',
-            message: 'Are you sure?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    fetch("http://localhost:8080/v1/admin/deletemovie/" + this.state.movie.id, {method: "GET"})
-                        .then(response => response.json)
-                        .then(data => {
-                            if (data.error) {
-                                this.setState({
-                                    alert: {type: "alert-danger", message: data.error.message}
-                                })
-                            } else {
-                                this.props.history.push({
-                                    pathname: "/admin",
-                                })
-                            }
-                        })
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => {}
-              }
-            ]
-          });
-    }
-
     componentDidMount() {
         // this.setState({
         //     movie: {
@@ -192,6 +96,109 @@ export default class EditMovie extends Component {
         } else {
             this.setState({ isLoaded: true });
         }
+    }
+
+    handleSubmit = (evt) => {
+        // console.log("Form was submitted");
+        evt.preventDefault();
+
+        //----------------------------------------------------------------
+        // client side validation
+        //----------------------------------------------------------------
+        let errors = [];
+        if (this.state.movie.title === "") {
+            errors.push("title");
+        }
+
+        this.setState({errors: errors});
+
+        if (errors.length > 0) {
+            return false;
+        }
+        //----------------------------------------------------------------
+
+        const data = new FormData(evt.target);
+        const payload = Object.fromEntries(data.entries()); // convert data to payload, and get all form data
+        // console.log(payload);
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        }
+
+        fetch('http://localhost:8080/v1/admin/editmovie', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data);
+                if (data.error) {
+                    alert(data.error.message);
+                    this.setState({
+                        alert: { type: "alert-danger", message: data.error.message },
+                    });
+                } else {
+                    // this.setState({
+                    //     alert: { type: "alert-success", message: "Changes saved!" },
+                    // });
+                    this.props.history.push({
+                        pathname: "/admin",
+                    });
+                }
+            })
+    }
+
+    handleChange = (evt) => {
+        let value = evt.target.value;
+        let name = evt.target.name;
+        this.setState((prevState) => ({
+            movie: {
+                ...prevState.movie,
+                [name]: value,
+            }
+        }))
+    }
+
+    hasError(key) {
+        return this.state.errors.indexOf(key) !== -1;
+    }
+
+    confirmDelete = (evt) => {
+        // console.log("would delete movie id", this.state.movie.id);
+
+        confirmAlert({
+            title: 'Delete Movie?',
+            message: 'Are you sure?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    fetch("http://localhost:8080/v1/admin/deletemovie/" + this.state.movie.id, {method: "GET"})
+                        .then(response => response.json)
+                        .then(data => {
+                            // console.log(data);
+                            if (data.error) {
+                                this.setState({
+                                    alert: {
+                                        type: "alert-danger",
+                                        message: data.error.message,
+                                    },
+                                });
+                            } else {
+                                this.setState({
+                                    alert: { type: "alert-success", message: "Movie deleted!" },
+                                });
+                                this.props.history.push({
+                                    pathname: "/admin",
+                                });
+                            }
+                        })
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => {}
+              }
+            ]
+          });
     }
 
     render() {
