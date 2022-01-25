@@ -10,6 +10,13 @@ export default class Admin extends Component {
     };
 
     componentDidMount() {
+        if (this.props.jwt === "") {
+            this.props.history.push({
+                pathname: "/login",
+            });
+            return;
+        }
+
         // execute after the component is rendered to the screen
         fetch("http://localhost:8080/v1/movies")
             // .then((response) => response.json())
