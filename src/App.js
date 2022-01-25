@@ -113,7 +113,10 @@ export default class App extends Component {
                   component={(props) => <Login {...props} handleJWTChange={this.handleJWTChange} />}
                 />
   
-                <Route path="/admin/movie/:id" component={EditMovie}/>
+                {/* pass jwt as props */}
+                <Route path="/admin/movie/:id" component={(props) => (
+                  <EditMovie {...props} jwt={this.state.jwt} />
+                )}/>
   
                 <Route path="/admin">
                   <Admin />

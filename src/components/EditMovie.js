@@ -51,6 +51,8 @@ export default class EditMovie extends Component {
     }
 
     componentDidMount() {
+        // console.log("JWT in EditMovie componentDidMount:", this.props.jwt);
+
         // this.setState({
         //     movie: {
         //         title: "The Godfather",
@@ -119,11 +121,15 @@ export default class EditMovie extends Component {
 
         const data = new FormData(evt.target);
         const payload = Object.fromEntries(data.entries()); // convert data to payload, and get all form data
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + this.props.jwt);
         // console.log(payload);
 
         const requestOptions = {
             method: 'POST',
             body: JSON.stringify(payload),
+            headers: myHeaders,
         }
 
         fetch('http://localhost:8080/v1/admin/editmovie', requestOptions)
