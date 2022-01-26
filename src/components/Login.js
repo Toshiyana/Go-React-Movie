@@ -68,7 +68,11 @@ export default class Login extends Component {
                         }
                     })
                 } else {
-                    console.log(data);
+                    // console.log(data);
+
+                    // Put jwt into local storage
+                    window.localStorage.setItem("jwt", JSON.stringify(Object.values(data)[0]));
+
                     this.handleJWTChange(Object.values(data)[0]);
                     this.props.history.push({
                         pathname: "/admin",

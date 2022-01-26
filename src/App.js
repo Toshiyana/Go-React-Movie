@@ -21,12 +21,25 @@ export default class App extends Component {
     this.handleJWTChange(this.handleJWTChange.bind(this));
   }
 
+  componentDidMount() {
+    // If you have jwt in local storage because of not taking long time after login (no-expired jwt),
+    // you can access admin page without login,
+    // getting jwt in localstorage .
+    let t = window.localStorage.getItem('jwt');
+    if (t) {
+      if (this.state.jwt === "") {
+        this.setState({jwt: JSON.parse(t)});
+      }
+    }
+  }
+
   handleJWTChange = (jwt) => {
     this.setState({jwt: jwt});
   }
 
   logout = () => {
     this.setState({jwt: ""});
+    window.localStorage.removeItem('jwt');
   }
 
   render() {
