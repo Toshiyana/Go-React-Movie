@@ -9,6 +9,7 @@ import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
 import Login from "./components/Login";
 import GraphQL from "./components/GraphQL";
+import OneMovieGraphQL from "./components/OneMovieGraphQL";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -115,6 +116,7 @@ export default class App extends Component {
                 </Route>
   
                 <Route path="/movies/:id" component={OneMovie}/>
+                <Route path="/movies-graphql/:id" component={OneMovieGraphQL}/>
   
                 {/* <Route path="/movies/:id">
                   <Movie />

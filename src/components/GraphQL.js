@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom';
 import Input from './form-components/Input';
 
 export default class GraphQL extends Component {
@@ -26,7 +27,14 @@ export default class GraphQL extends Component {
             })
         )
 
-        this.performSearch();
+        // search only when form value lenght is more than 3.
+        if (value.length > 2) {
+            this.performSearch();
+        } else if (value.length === 0) {
+            this.displayAllMovies();
+        } else {
+            this.setState({movies: []})
+        }
     }
 
     performSearch() {
@@ -41,7 +49,7 @@ export default class GraphQL extends Component {
                 description
             }
         }
-        `
+        `;
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -50,7 +58,7 @@ export default class GraphQL extends Component {
             method: "POST",
             body: payload,
             headers: myHeaders,
-        }
+        };
 
         fetch("http://localhost:8080/v1/graphql", requestOptions)
             .then((response) => response.json())
@@ -72,7 +80,7 @@ export default class GraphQL extends Component {
             })
     }
 
-    componentDidMount() {
+    displayAllMovies() {
         const payload = `
         {
             list {
@@ -83,7 +91,7 @@ export default class GraphQL extends Component {
                 description
             }
         }
-        `
+        `;
 
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -92,7 +100,7 @@ export default class GraphQL extends Component {
             method: "POST",
             body: payload,
             headers: myHeaders,
-        }
+        };
 
         fetch("http://localhost:8080/v1/graphql", requestOptions)
             .then((response) => response.json())
@@ -101,11 +109,15 @@ export default class GraphQL extends Component {
                 return theList;
             })
             .then((theList) => {
-                console.log(theList);
+                // console.log(theList);
                 this.setState({
                     movies: theList,
                 })
             })
+    }
+
+    componentDidMount() {
+        this.displayAllMovies();
     }
 
     render() {
@@ -125,10 +137,10 @@ export default class GraphQL extends Component {
 
                 <div className="list-group">
                     {movies.map((m) => (
-                        <a
+                        <Link
                             key={m.id}
                             className="list-group-item list-group-item-action"
-                            href="#!"
+                            to={`/movies-graphql/${m.id}`}
                         >
                             <strong>{m.title}</strong>
                             <br />
@@ -137,7 +149,7 @@ export default class GraphQL extends Component {
                             </small>
                             <br />
                             {m.description.slice(0, 100)}...
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </Fragment>
