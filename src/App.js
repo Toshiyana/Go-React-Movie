@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
-import Movies from './components/Movies';
+// import Movies from './components/Movies';
 import Admin from './components/Admin';
 import OneMovie from './components/OneMovie';
 import Genres from './components/Genres';
@@ -10,6 +10,7 @@ import EditMovie from './components/EditMovie';
 import Login from "./components/Login";
 import GraphQL from "./components/GraphQL";
 import OneMovieGraphQL from "./components/OneMovieGraphQL";
+import MoviesFunc from "./components/MoviesFunc";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -112,7 +113,8 @@ export default class App extends Component {
                 </Route>
   
                 <Route exact path="/movies">
-                  <Movies />
+                  {/* <Movies /> */}
+                  <MoviesFunc />
                 </Route>
   
                 <Route path="/movies/:id" component={OneMovie}/>
