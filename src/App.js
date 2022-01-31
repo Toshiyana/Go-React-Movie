@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 // import Movies from './components/Movies';
 import Admin from './components/Admin';
-import OneMovie from './components/OneMovie';
+// import OneMovie from './components/OneMovie';
 // import Genres from './components/Genres';
 import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
@@ -14,6 +14,7 @@ import OneMovieGraphQL from "./components/OneMovieGraphQL";
 
 import MoviesFunc from "./components/MoviesFunc";
 import GenresFunc from "./components/GenresFunc";
+import OneMovieFunc from "./components/OneMovieFunc";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -120,7 +121,8 @@ export default class App extends Component {
                   <MoviesFunc />
                 </Route>
   
-                <Route path="/movies/:id" component={OneMovie}/>
+                {/* <Route path="/movies/:id" component={OneMovie}/> */}
+                <Route path="/movies/:id" component={OneMovieFunc}/>
                 <Route path="/movies-graphql/:id" component={OneMovieGraphQL}/>
   
                 {/* <Route path="/movies/:id">

@@ -18,7 +18,7 @@ function GenresFunc(props) {
             .then((json) => {
                 setGenres(json.genres);
             });
-    });
+    }, []);
 
     if (error != null) {
         return <div>Error: {error.message}</div>

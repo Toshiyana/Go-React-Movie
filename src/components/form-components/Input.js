@@ -1,3 +1,5 @@
+// You don't have to convert react-hook style
+// because this code is already written by function.
 const Input = (props) => {
     return (
         <div className="mb-3">
