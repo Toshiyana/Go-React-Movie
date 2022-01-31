@@ -14,7 +14,7 @@ export default class OneGenre extends Component {
         fetch("http://localhost:8080/v1/movies/" + this.props.match.params.id)
             // .then((response) => response.json())
             .then((response) => {
-                console.log("Status code is", response.status);
+                // console.log("Status code is", response.status);
                 if (response.status !== "200") {
                     let err = Error;
                     err.message = "Invalid response code: " + response.status;
@@ -56,7 +56,13 @@ export default class OneGenre extends Component {
 
                     <div className="list-group">
                         {movies.map( (m) => (
-                            <Link to={`/movies/${m.id}`} className="list-group-item list-group-item-action">{m.title}</Link>
+                            <Link
+                                key={m.id}
+                                to={`/movies/${m.id}`}
+                                className="list-group-item list-group-item-action"
+                            >
+                                {m.title}
+                            </Link>
                         ))}
                     </div>
                 </Fragment>

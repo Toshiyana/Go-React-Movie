@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Admin from './components/Admin';
 // import OneMovie from './components/OneMovie';
 // import Genres from './components/Genres';
-import OneGenre from './components/OneGenre';
+// import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
 import Login from "./components/Login";
 
@@ -15,6 +15,7 @@ import OneMovieGraphQL from "./components/OneMovieGraphQL";
 import MoviesFunc from "./components/MoviesFunc";
 import GenresFunc from "./components/GenresFunc";
 import OneMovieFunc from "./components/OneMovieFunc";
+import OneGenreFunc from "./components/OneGenreFunc";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -134,7 +135,8 @@ export default class App extends Component {
                   <GenresFunc />
                 </Route>
   
-                <Route path="/genres/:id" component={OneGenre}/>
+                {/* <Route path="/genres/:id" component={OneGenre}/> */}
+                <Route path="/genres/:id" component={OneGenreFunc}/>
 
                 <Route
                   exact path="/login"
