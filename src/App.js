@@ -4,13 +4,16 @@ import Home from './components/Home';
 // import Movies from './components/Movies';
 import Admin from './components/Admin';
 import OneMovie from './components/OneMovie';
-import Genres from './components/Genres';
+// import Genres from './components/Genres';
 import OneGenre from './components/OneGenre';
 import EditMovie from './components/EditMovie';
 import Login from "./components/Login";
+
 import GraphQL from "./components/GraphQL";
 import OneMovieGraphQL from "./components/OneMovieGraphQL";
+
 import MoviesFunc from "./components/MoviesFunc";
+import GenresFunc from "./components/GenresFunc";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -125,7 +128,8 @@ export default class App extends Component {
                 </Route> */}
   
                 <Route exact path="/genres">
-                  <Genres />
+                  {/* <Genres /> */}
+                  <GenresFunc />
                 </Route>
   
                 <Route path="/genres/:id" component={OneGenre}/>

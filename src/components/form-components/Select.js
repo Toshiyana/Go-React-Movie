@@ -1,3 +1,6 @@
+// You don't have to convert react-hook style
+// because this code is already written by function.
+
 const Select = (props) => {
     return (
         <div className="mb-3">
