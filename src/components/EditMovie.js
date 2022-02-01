@@ -188,7 +188,12 @@ export default class EditMovie extends Component {
                     myHeaders.append("Content-Type", "application/json");
                     myHeaders.append("Authorization", "Bearer " + this.props.jwt);
 
-                    fetch("http://localhost:8080/v1/admin/deletemovie/" + this.state.movie.id, {method: "GET"})
+                    fetch("http://localhost:8080/v1/admin/deletemovie/" + this.state.movie.id,
+                        {
+                            method: "GET",
+                            headers: myHeaders,
+                        }
+                    )
                         .then(response => response.json)
                         .then(data => {
                             // console.log(data);

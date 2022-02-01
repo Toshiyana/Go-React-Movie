@@ -6,7 +6,7 @@ import Admin from './components/Admin';
 // import OneMovie from './components/OneMovie';
 // import Genres from './components/Genres';
 // import OneGenre from './components/OneGenre';
-import EditMovie from './components/EditMovie';
+// import EditMovie from './components/EditMovie';
 import Login from "./components/Login";
 
 import GraphQL from "./components/GraphQL";
@@ -16,6 +16,7 @@ import MoviesFunc from "./components/MoviesFunc";
 import GenresFunc from "./components/GenresFunc";
 import OneMovieFunc from "./components/OneMovieFunc";
 import OneGenreFunc from "./components/OneGenreFunc";
+import EditMovieFunc from "./components/EditMovieFunc";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -145,7 +146,8 @@ export default class App extends Component {
   
                 {/* pass jwt as props */}
                 <Route path="/admin/movie/:id" component={(props) => (
-                  <EditMovie {...props} jwt={this.state.jwt} />
+                  // <EditMovie {...props} jwt={this.state.jwt} />
+                  <EditMovieFunc {...props} jwt={this.state.jwt} />
                 )}/>
 
                 <Route path="/admin" component={(props) => (
