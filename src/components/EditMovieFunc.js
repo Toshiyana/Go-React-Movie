@@ -98,7 +98,7 @@ function EditMovieFunc(props) {
             headers: myHeaders,
         }
 
-        console.log(payload);
+        // console.log(payload);
 
         fetch('http://localhost:8080/v1/admin/editmovie', requestOptions)
             .then((response) => response.json())
@@ -133,6 +133,8 @@ function EditMovieFunc(props) {
                             method: 'GET',
                             headers: myHeaders,
                         }
+
+                        console.log(movie.id)
 
                         fetch("http://localhost:8080/v1/admin/deletemovie/" + movie.id, requestOptions)
                             .then(response => response.json)
